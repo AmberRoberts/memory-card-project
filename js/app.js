@@ -2,6 +2,9 @@
  * Create a list that holds all of your cards
  */
 
+const card = document.getElementsByClassName('card');
+const allCards = Array.from(card);
+const deck = document.getElementsByClassName('deck');
 
 /*
  * Display the cards on the page
@@ -25,7 +28,16 @@ function shuffle(array) {
     return array;
 }
 
+function createCard(cards) {
+  return '<li class="card"><i class="fa $(card)"></i></li>';
+}
+function createDeck(){
+  let fullDeck = shuffle(allCards).map(function(){
+    return createCard(cards);
+  });
 
+      deck.innerHTML = createDeck.join('');
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -36,3 +48,10 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ allCards.forEach(function(card) {
+ card.addEventListener('click', function(e) {
+   console.log('clicky');
+   card.classList.add('open', 'show');
+ });
+ });
