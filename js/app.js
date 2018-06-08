@@ -118,23 +118,27 @@ deck.addEventListener('click', flipIt, false); //  TODO:  this isn't working
       console.log('flipped it');
     }
 
-      // If two cards are flipped
-setTimeout(function() {
-      event.target.classList.remove('open', 'show');
-      flippedCards = [];
+      // If the two cards don't match
+if (flippedCards.length == 2) {
+    setTimeout(function() {
+      flippedCards.forEach(function(card) {
+      card.classList.remove('open', 'show');
+    });
+    flippedCards = [];
       console.log("time is up");
-    }, 1500);
-
+    }, 1000);
 }
+}
+
 
 // timer reference: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_setinterval2
 
-/* function startTimer() {
-  let timer = document.querySelector('.timer');
-  let seconds = 0;
-  let minutes = 0;
+/*  let timer = document.querySelector('.timer');
+  let secs = 0;
+  let mins = 0;
 
-  setInterval(timer() {
+  function startTimer() {
+    timer = setInterval(timer() {
     // add seconds timer.innerHTML = ``
   }, 1000);
 
@@ -142,6 +146,12 @@ setTimeout(function() {
     seconds = 0;
     minutes++;
   }
+}
+
+function stopTimer() { // Stop timer and clear seconds/minutes from timer display
+  clearInterval(timer);
+  secs = 0;
+  mins = 0;
 } */
 
 function winning() {
@@ -156,7 +166,7 @@ restart.addEventListener("click", function(newGame) {
   console.log("clicked it");
   totalClicks = [];
   startGame();
-  // reset stars
+  // reset stars - need to add class on game start?
   // reset timer
 });
 
