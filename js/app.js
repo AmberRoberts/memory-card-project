@@ -199,7 +199,7 @@
 
 
   function winning() {
-    if (matchedCards.length === allCards.length) {
+    if (matchedCards.length === allCards.length/2) {
       console.log("winning!");
       // clearInterval(timer);
       // end game and open final score message box
@@ -218,6 +218,7 @@
     clearInterval(timer);
     seconds = 0;
     minutes = 0;
+    moveCount = 0;
     matchedCards = [];
     flippedCards = [];
     totalClicks = [];
