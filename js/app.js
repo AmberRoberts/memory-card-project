@@ -102,6 +102,9 @@
       stars[2].remove();
       starTotal--;
     }
+    else {
+      console.log('three stars');
+    }
   }
 
   /*
@@ -169,6 +172,7 @@
 
     function startTimer() {
       // Begin counting
+      // TODO why does this count faster upon reset?
       timer = setInterval(insertTime, 1000);
     }
 
@@ -197,6 +201,7 @@
   function winning() {
     if (matchedCards.length === allCards.length) {
       console.log("winning!");
+      // clearInterval(timer);
       // end game and open final score message box
       // call stars and time for message box
     } else {
@@ -210,9 +215,12 @@
   let restart = document.querySelector(".restart");
   restart.addEventListener("click", function(newGame) {
     console.log("clicked it");
-    let matchedCards = [];
-    let flippedCards = [];
-    let totalClicks = [];
+    clearInterval(timer);
+    seconds = 0;
+    minutes = 0;
+    matchedCards = [];
+    flippedCards = [];
+    totalClicks = [];
     startGame();
     // reset stars - need to add class on game start?
     // reset timer
