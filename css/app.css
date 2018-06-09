@@ -113,3 +113,11 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.modal {
+  display: none;
+  z-index: 1;
+  padding: 100px;
+  background-color: green;
+  
+}

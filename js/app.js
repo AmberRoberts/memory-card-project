@@ -178,8 +178,6 @@
 
     function stopTimer() { // Stop timer and clear seconds/minutes from timer display
       clearInterval(timer);
-      secs = 0;
-      mins = 0;
     }
 
     function insertTime() {
@@ -201,13 +199,24 @@
   function winning() {
     if (matchedCards.length === allCards.length/2) {
       console.log("winning!");
-      // clearInterval(timer);
+      modal();
+      stopTimer();
       // end game and open final score message box
       // call stars and time for message box
     } else {
         console.log("Keep trying");
       }
     }
+
+    // *****Modal*****
+
+    function modal() {
+    let modal = document.getElementById('winnerModal');
+    let button = document.getElementById('close');
+
+    modal.style.display = "block";
+  }
+
 
 
   // ***** Restart Button function *****
