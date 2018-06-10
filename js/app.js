@@ -212,7 +212,7 @@
     modal.style.display = "block";
 
     // On click, hide modal and restart game
-    button.addEventListener("click", function(closeModal) {
+    button.addEventListener("click", function(e) {
       modal.style.display = "none";
       clearInterval(timer);
       seconds = 0;
@@ -223,9 +223,14 @@
       totalClicks = [];
       startGame();
   })
+
+    let exit = document.querySelector('.close');
+    exit.addEventListener("click", function(e) {
+      modal.style.display = "none";
+  })
 }
 
-// TODO: Modal scoring, modal CSS/pretty
+// TODO: Modal scoring, stars reset
 
   // ***** Restart Button function *****
 

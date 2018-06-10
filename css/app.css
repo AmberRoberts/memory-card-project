@@ -131,11 +131,23 @@ h1 {
   border: 2px solid;
   border-radius: 10px;
   margin: 10% auto;
-  padding: 15px;
+  padding: 10px 80px;
   width: 60%;
   justify-content: center;
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 80%);
   box-shadow: 10px 8px 20px 0 rgba(46, 61, 73, 0.8);
+}
+
+button {
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 
