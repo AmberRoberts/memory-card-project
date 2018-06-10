@@ -75,7 +75,6 @@
     let matchedCards = [];
     let flippedCards = [];
     let totalClicks = [];
-    console.log("cards here");
     startTimer();
   }
 
@@ -101,9 +100,6 @@
       // Zero stars after 44 moves
       stars[2].remove();
       starTotal--;
-    }
-    else {
-      console.log('three stars');
     }
   }
 
@@ -149,7 +145,6 @@
             flippedCards[1].classList.add('show');
 
             winning(); // Check to see if the game has been won
-      console.log("flipped it");
     }
 
     // If the two cards don't match, flip back over
@@ -159,7 +154,6 @@
           card.classList.remove("open", "show");
         });
         flippedCards = [];
-        console.log("time is up");
       }, 1000);
     }
   }
@@ -198,32 +192,45 @@
 
   function winning() {
     if (matchedCards.length === allCards.length/2) {
-      console.log("winning!");
       modal();
       stopTimer();
       // end game and open final score message box
       // call stars and time for message box
     } else {
-        console.log("Keep trying");
+        console.log("Keep Trying");
       }
     }
 
     // *****Modal*****
+    // Upon winning, modal opens with scoring information
 
     function modal() {
-    let modal = document.getElementById('winnerModal');
-    let button = document.getElementById('close');
 
+      let modal = document.getElementById('winnerModal');
+      let timeScore = `${minutes.innerHTML}:${seconds.innerHTML}`;
+      let button = document.getElementById('close');
     modal.style.display = "block";
-  }
 
+    // On click, hide modal and restart game
+    button.addEventListener("click", function(closeModal) {
+      modal.style.display = "none";
+      clearInterval(timer);
+      seconds = 0;
+      minutes = 0;
+      moveCount = 0;
+      matchedCards = [];
+      flippedCards = [];
+      totalClicks = [];
+      startGame();
+  })
+}
 
+// TODO: Modal scoring, modal CSS/pretty
 
   // ***** Restart Button function *****
 
   let restart = document.querySelector(".restart");
   restart.addEventListener("click", function(newGame) {
-    console.log("clicked it");
     clearInterval(timer);
     seconds = 0;
     minutes = 0;
@@ -233,7 +240,6 @@
     totalClicks = [];
     startGame();
     // reset stars - need to add class on game start?
-    // reset timer
   });
 
   // In addition to noted assistance above, I referenced live webinar walkthrough with Mike Wales, Ryan Waite via chat and live webinar, FEND Project 2 slack channel, https://developer.mozilla.org, and https://www.w3schools.com for functions and process.
