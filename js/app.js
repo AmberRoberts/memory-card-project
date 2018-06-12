@@ -1,5 +1,3 @@
-  // TODO timer, matching, modal
-
   /*
    * Create a list that holds all of your cards
    */
@@ -25,14 +23,16 @@
 
   const card = document.getElementsByClassName("card");
 
+
+// ***** Move counter *****
+
   let moveCount = 0;
   const moves = document.querySelector(".moves");
   moves.textContent = 0;
 
   function addMove() {
-    // increase moves
-    moveCount++;
-    moves.innerHTML = moveCount / 2; // displays a pair of moves as 1 move
+    moveCount++; // increase moves
+    moves.innerHTML = moveCount; // Displays amount of moves in score panel
   }
 
   /*
@@ -85,21 +85,20 @@
   let starTotal = 3; // To call for scoring in the modal
 
   function starCount(stars) {
-    // Remove one star after 24 moves
-    if (totalClicks.length === 24) {
-      // or if (moveCount === 24)
-      stars[0].remove();
-      starTotal--;
+    // Remove one star after 16 moves
+    if (moveCount === 16) {
+      stars[0].style.display = "none";
+      starTotal = 2;
     }
-    if (totalClicks.length === 34) {
-      // Remove another star after 34 moves
-      stars[1].remove();
-      starTotal--;
+    if (moveCount === 26) {
+      // Remove another star after 26 moves
+      stars[1].style.display = "none";
+      starTotal = 1;
     }
-    if (totalClicks.length === 44) {
-      // Zero stars after 44 moves
-      stars[2].remove();
-      starTotal--;
+    if (moveCount === 36) {
+      // Zero stars after 36 moves
+      stars[2].style.display = "none";
+      starTotal =0;
     }
   }
 
@@ -130,7 +129,7 @@
       flippedCards.push(event.target);
       totalClicks.push(event.target);
       event.target.classList.add("show", "open");
-      addMove();
+      // addMove();
       starCount(stars);
   }
   // Compare the two currently flipped cards to see if they match, if so keep flipped
@@ -155,6 +154,7 @@
         });
         flippedCards = [];
       }, 1000);
+      addMove();
     }
   }
 
@@ -207,11 +207,16 @@
     function modal() {
 
       let modal = document.getElementById('winnerModal');
-      let timeScore = `${minutes.innerHTML}:${seconds.innerHTML}`;
-      let button = document.getElementById('close');
-    modal.style.display = "block";
+      let button = document.getElementById('again');
+
+      modal.style.display = "block";
+
+      document.querySelector('.stopwatch').innerHTML = minutes + ':' + seconds;
+      document.querySelector('.moveTotal').innerHTML = moveCount;
+      document.querySelector('.starScore').innerHTML = starTotal;
 
     // On click, hide modal and restart game
+
     button.addEventListener("click", function(e) {
       modal.style.display = "none";
       clearInterval(timer);
@@ -224,13 +229,15 @@
       startGame();
   })
 
+    // Click the X to close modal, game does not restart
+
     let exit = document.querySelector('.close');
     exit.addEventListener("click", function(e) {
       modal.style.display = "none";
   })
 }
 
-// TODO: Modal scoring, stars reset
+// TODO: Stars reset
 
   // ***** Restart Button function *****
 
