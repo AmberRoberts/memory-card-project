@@ -1,4 +1,4 @@
-// TODO: reset stars, fix deck click issue, clean up code
+// TODO: fix deck click issue, clean up code, README
 
   /*
    * Create a list that holds all of your cards
@@ -83,7 +83,6 @@
 
   startGame();
 
-  // log total clicks for scoring with star rating
   let stars = document.querySelectorAll(".fa-star");
   let starTotal = 3; // To call for scoring in the modal
 
@@ -120,9 +119,13 @@
   let totalClicks = [];
 
   // Function to flip the cards and compare/ match them.  Credit for assistance and event.target tutorial, as well as moral support, to Julian Johannesen in the FEND track.
-  deck.addEventListener("click", flipIt, false);
+  deck.addEventListener("click", flipIt);
 
   function flipIt(event) {
+    if (event.target == deck) { // If deck is clicked, don't count it
+      return;
+    }
+
     if (
       flippedCards.length < 2 &&
       !event.target.classList.contains("open") &&
@@ -132,7 +135,6 @@
       flippedCards.push(event.target);
       totalClicks.push(event.target);
       event.target.classList.add("show", "open");
-      // addMove();
       starCount(stars);
   }
   // Compare the two currently flipped cards to see if they match, if so keep flipped
@@ -180,7 +182,7 @@
       seconds++;
 
       if (seconds < 10) {
-        seconds = `${seconds}`;
+        seconds = `0${seconds}`;
       }
 
       if (seconds >= 60) {
@@ -193,11 +195,9 @@
 
 
   function winning() {
-    if (matchedCards.length == allCards.length/2) {
+    if (matchedCards.length === 16) { //WHY WON'T THIS WORK??
+    stopTimer();
       modal();
-      stopTimer();
-      // end game and open final score message box
-      // call stars and time for message box
     } else {
         console.log("Keep Trying");
       }
@@ -210,7 +210,6 @@
 
       let modal = document.getElementById('winnerModal');
       let button = document.getElementById('again');
-      // let stars = document.querySelectorAll('fa-star'); // not working
 
       modal.style.display = "block";
 
@@ -244,8 +243,6 @@
   })
 }
 
-// TODO: Stars reset
-
   // ***** Restart Button function *****
 
   let restart = document.querySelector(".restart");
@@ -257,8 +254,10 @@
     matchedCards = [];
     flippedCards = [];
     totalClicks = [];
+    stars[0].style.display = "block";
+    stars[1].style.display = "block";
+    stars[2].style.display = "block";
     startGame();
-    // reset stars - need to add class on game start?
   });
 
   // In addition to noted assistance above, I referenced live webinar walkthrough with Mike Wales, Ryan Waite via chat and live webinar, FEND Project 2 slack channel, https://developer.mozilla.org, and https://www.w3schools.com for functions and process.
