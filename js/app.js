@@ -180,7 +180,7 @@
       seconds++;
 
       if (seconds < 10) {
-        seconds = `${seconds}`;
+        seconds = `0${seconds}`;
       }
 
       if (seconds >= 60) {
@@ -222,18 +222,18 @@
 
     button.addEventListener("click", function(e) {
       modal.style.display = "none";
-      clearInterval(timer);
-      seconds = 0;
-      minutes = 0;
-      moveCount = 0;
-      matchedCards = [];
-      flippedCards = [];
-      totalClicks = [];
-      starTotal = 3;
-      stars[0].style.display = "block";
-      stars[1].style.display = "block";
-      stars[2].style.display = "block";
-      startGame();
+      // clearInterval(timer);
+      // seconds = 0;
+      // minutes = 0;
+      // moveCount = 0;
+      // matchedCards = [];
+      // flippedCards = [];
+      // totalClicks = [];
+      // starTotal = 3;
+      // stars[0].style.display = "block";
+      // stars[1].style.display = "block";
+      // stars[2].style.display = "block";
+      // startGame();
   })
 
     // Click the X to close modal, game does not restart
@@ -244,12 +244,16 @@
   })
 }
 
-// TODO: Stars reset
 
   // ***** Restart Button function *****
 
   let restart = document.querySelector(".restart");
   restart.addEventListener("click", function(newGame) {
+    resetAll();
+    startGame();
+  });
+
+  function resetAll() {
     clearInterval(timer);
     seconds = 0;
     minutes = 0;
@@ -257,8 +261,9 @@
     matchedCards = [];
     flippedCards = [];
     totalClicks = [];
-    startGame();
-    // reset stars - need to add class on game start?
-  });
-
+    starTotal = 3;
+    stars[0].style.display = "block";
+    stars[1].style.display = "block";
+    stars[2].style.display = "block";
+  }
   // In addition to noted assistance above, I referenced live webinar walkthrough with Mike Wales, Ryan Waite via chat and live webinar, FEND Project 2 slack channel, https://developer.mozilla.org, and https://www.w3schools.com for functions and process.
