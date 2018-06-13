@@ -1,3 +1,5 @@
+// TODO: reset stars, fix deck click issue, clean up code
+
   /*
    * Create a list that holds all of your cards
    */
@@ -59,6 +61,7 @@
     return array;
   }
 
+// Add HTML to generate cards
   function createCard(card) {
     return `<li class="card" data-card="${card}"> <i class="fa ${card}"> </i> </li>`;
   }
@@ -166,7 +169,6 @@
 
     function startTimer() {
       // Begin counting
-      // TODO why does this count faster upon reset?
       timer = setInterval(insertTime, 1000);
     }
 
@@ -191,7 +193,7 @@
 
 
   function winning() {
-    if (matchedCards.length === allCards.length/2) {
+    if (matchedCards.length == 8) {
       modal();
       stopTimer();
       // end game and open final score message box
@@ -208,6 +210,7 @@
 
       let modal = document.getElementById('winnerModal');
       let button = document.getElementById('again');
+      // let stars = document.querySelectorAll('fa-star'); // not working
 
       modal.style.display = "block";
 
@@ -215,7 +218,7 @@
       document.querySelector('.moveTotal').innerHTML = moveCount;
       document.querySelector('.starScore').innerHTML = starTotal;
 
-    // On click, hide modal and restart game
+    // On click, hide modal, reset scoring and arrays, and restart game
 
     button.addEventListener("click", function(e) {
       modal.style.display = "none";
@@ -226,6 +229,10 @@
       matchedCards = [];
       flippedCards = [];
       totalClicks = [];
+      starTotal = 3;
+      stars[0].style.display = "block";
+      stars[1].style.display = "block";
+      stars[2].style.display = "block";
       startGame();
   })
 
