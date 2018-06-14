@@ -1,4 +1,4 @@
-// TODO: fix deck click issue, clean up code, README
+// TODO: fix matching array/scoring issue, clean up code, README
 
   /*
    * Create a list that holds all of your cards
@@ -34,7 +34,7 @@
 
   function addMove() {
     moveCount++; // increase moves
-    moves.innerHTML = moveCount; // Displays amount of moves in score panel
+    moves.textContent = moveCount; // Displays amount of moves in score panel
   }
 
   /*
@@ -77,7 +77,6 @@
     moves.textContent = 0;
     let matchedCards = [];
     let flippedCards = [];
-    let totalClicks = [];
     startTimer();
   }
 
@@ -116,10 +115,9 @@
    */
   let flippedCards = [];
   let matchedCards = [];
-  let totalClicks = [];
 
   // Function to flip the cards and compare/ match them.  Credit for assistance and event.target tutorial, as well as moral support, to Julian Johannesen in the FEND track.
-  deck.addEventListener("click", flipIt);
+  deck.addEventListener("click", flipIt, false);
 
   function flipIt(event) {
     if (event.target == deck) { // If deck is clicked, don't count it
@@ -127,16 +125,16 @@
     }
 
     if (
-      flippedCards.length < 2 &&
+      flippedCards.length <= 2 &&
       !event.target.classList.contains("open") &&
       !event.target.classList.contains("show") &&
       !event.target.classList.contains("match")
     ) {
       flippedCards.push(event.target);
-      totalClicks.push(event.target);
       event.target.classList.add("show", "open");
       starCount(stars);
   }
+
   // Compare the two currently flipped cards to see if they match, if so keep flipped
       if (flippedCards.length == 2 && flippedCards[0].dataset.card == flippedCards[1].dataset.card) {
             flippedCards[0].classList.add('match');
@@ -174,7 +172,7 @@
       timer = setInterval(insertTime, 1000);
     }
 
-    function stopTimer() { // Stop timer and clear seconds/minutes from timer display
+    function stopTimer() {
       clearInterval(timer);
     }
 
@@ -182,7 +180,7 @@
       seconds++;
 
       if (seconds < 10) {
-        seconds = `0${seconds}`;
+        seconds = `0${seconds}`; // :00 for seconds under 10
       }
 
       if (seconds >= 60) {
@@ -190,14 +188,14 @@
         seconds = 00;
       }
 
-      document.querySelector('.timer').innerHTML = minutes + ':' + seconds;
+      document.querySelector('.timer').textContent = minutes + ':' + seconds;
     }
 
 
   function winning() {
-    if (matchedCards.length === 16) { //WHY WON'T THIS WORK??
-    stopTimer();
-      modal();
+    if (matchedCards.length === allCards.length/2) { //When matched cards length is equal to allCards length
+    stopTimer(); // Stop the timer
+    modal(); // Display scoring modal
     } else {
         console.log("Keep Trying");
       }
@@ -213,9 +211,9 @@
 
       modal.style.display = "block";
 
-      document.querySelector('.stopwatch').innerHTML = minutes + ':' + seconds;
-      document.querySelector('.moveTotal').innerHTML = moveCount;
-      document.querySelector('.starScore').innerHTML = starTotal;
+      document.querySelector('.stopwatch').textContent = minutes + ':' + seconds;
+      document.querySelector('.moveTotal').textContent = moveCount;
+      document.querySelector('.starScore').textContent = starTotal;
 
     // On click, hide modal, reset scoring and arrays, and restart game
 
@@ -227,7 +225,6 @@
       moveCount = 0;
       matchedCards = [];
       flippedCards = [];
-      totalClicks = [];
       starTotal = 3;
       stars[0].style.display = "block";
       stars[1].style.display = "block";
@@ -253,7 +250,6 @@
     moveCount = 0;
     matchedCards = [];
     flippedCards = [];
-    totalClicks = [];
     stars[0].style.display = "block";
     stars[1].style.display = "block";
     stars[2].style.display = "block";
