@@ -148,18 +148,3 @@ button {
   font-size: 24px;
   cursor: pointer;
 }
-
-/* ***** Media Queries ***** */
-
-@media screen and (max-width: 665px) {
-  .deck {
-    width: 90%;
-    height: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .card {
-    max-width: 25%;
-    max-heigh: 25%;
-  }
-}

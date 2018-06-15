@@ -43,7 +43,7 @@ function addMove() {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-  var currentIndex = array.length,
+  let currentIndex = array.length,
       temporaryValue,
       randomIndex;
 
@@ -84,19 +84,14 @@ let starTotal = 3; // To call for scoring in the modal
 
 function starCount(stars) {
   // Remove one star after 16 moves
-  if (moveCount === 16) {
+  if (moveCount === 26) {
     stars[0].style.display = "none";
     starTotal = 2;
   }
-  if (moveCount === 26) {
+  if (moveCount === 36) {
     // Remove another star after 26 moves
     stars[1].style.display = "none";
     starTotal = 1;
-  }
-  if (moveCount === 36) {
-    // Zero stars after 36 moves
-    stars[2].style.display = "none";
-    starTotal = 0;
   }
 }
 
@@ -227,7 +222,6 @@ function modal() {
     starTotal = 3;
     stars[0].style.display = "block";
     stars[1].style.display = "block";
-    stars[2].style.display = "block";
     startGame();
   });
 
@@ -251,7 +245,6 @@ restart.addEventListener("click", function(newGame) {
   flippedCards = [];
   stars[0].style.display = "block";
   stars[1].style.display = "block";
-  stars[2].style.display = "block";
   startGame();
 });
 
